@@ -57,5 +57,23 @@ namespace kg1
             }
             progressBar1.Value = 0;
         }
+
+        private void размытиеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new BlurFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void гауссToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new GaussianFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void серыйToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new GrayScale();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
     }
 }
