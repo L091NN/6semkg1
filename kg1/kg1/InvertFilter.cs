@@ -8,7 +8,7 @@ using System.Drawing;
 namespace kg1
 {
      class InvertFilter : Filters
-    {
+     {
         protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
         {
             Color sourceColor = sourceImage.GetPixel(x,y);
@@ -16,5 +16,5 @@ namespace kg1
 
             return resultColor;
         }
-    }
+     }
 }

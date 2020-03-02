@@ -93,5 +93,59 @@ namespace kg1
             Filters filter = new Sepia();
             backgroundWorker1.RunWorkerAsync(filter);
         }
+
+        private void увеличитьЯркостьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new IncreaseBrightness();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void уменьшитьЯркостьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new DecreaseBrightness();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void повыситьРезкостьToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            Filters filter = new Sharpen();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void серыйМирToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new GrayWorld();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void нормализацияЯркостиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NormalizeBrightness filter = new NormalizeBrightness();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void сдвигToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new Shift();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void поворотToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new Rotate();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void волны1ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new Waves1();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void волны2ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new Waves2();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
     }
 }
