@@ -65,6 +65,7 @@
     <Compile Include="IncreaseBrightness.cs" />
     <Compile Include="InvertFilter.cs" />
     <Compile Include="MatrixFilter.cs" />
+    <Compile Include="MedianFilter.cs" />
     <Compile Include="Morphology.cs" />
     <Compile Include="NormalizeBrightness.cs" />
     <Compile Include="Program.cs" />

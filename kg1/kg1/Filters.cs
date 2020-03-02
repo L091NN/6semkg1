@@ -16,6 +16,7 @@ namespace kg1
             for (int x = 0; x < sourceImage.Width; x++)
             {
                 worker.ReportProgress((int)((float)x / resultImage.Width * 100));
+                if (worker.CancellationPending) return null;
                 for (int y = 0; y < sourceImage.Height; y++)
                 {
                     resultImage.SetPixel(x, y, calculateNewPixelColor(sourceImage, x, y));

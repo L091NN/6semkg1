@@ -49,6 +49,8 @@ namespace kg1
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Value = e.ProgressPercentage;
+            if (progressBar1.Value == 100) button1.Text = "DONE";
+            if (!backgroundWorker1.CancellationPending) button1.Text = e.ProgressPercentage.ToString();
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -59,6 +61,7 @@ namespace kg1
                 pictureBox1.Refresh();
             }
             progressBar1.Value = 0;
+
         }
 
         private void размытиеToolStripMenuItem_Click(object sender, EventArgs e)
@@ -225,6 +228,18 @@ namespace kg1
             {
                 Morphology.y = new_height;
             }
+        }
+
+        private void медианаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new MedianFilter();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.CancelAsync();
+            button1.Text = "STOP";
         }
     }
 }
