@@ -75,5 +75,23 @@ namespace kg1
             Filters filter = new GrayScale();
             backgroundWorker1.RunWorkerAsync(filter);
         }
+
+        private void собельПоХToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new SobelFilterX();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void собельПоУToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new SobelFilterY();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void сепияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new Sepia();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
     }
 }
