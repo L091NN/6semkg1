@@ -14,6 +14,7 @@ namespace kg1
             int new_x = (int)(x + 20.0 * Math.Sin(2.0 * Math.PI * y / 60.0));
             int new_y = y;
 
+
             if((0 > new_x) || (sourceImage.Width <= new_x))
             {
                 return Color.FromArgb(0, 0, 0);

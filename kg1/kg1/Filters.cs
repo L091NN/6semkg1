@@ -25,6 +25,20 @@ namespace kg1
             return resultImage;
         }
 
+        public Bitmap processImage(Bitmap sourceImage)
+        {
+            Bitmap resultImage = new Bitmap(sourceImage.Width, sourceImage.Height);
+            for (int x = 0; x < sourceImage.Width; x++)
+            {
+                for (int y = 0; y < sourceImage.Height; y++)
+                {
+                    resultImage.SetPixel(x, y, calculateNewPixelColor(sourceImage, x, y));
+                }
+            }
+
+            return resultImage;
+        }
+
         protected abstract Color calculateNewPixelColor(Bitmap sourceImage, int x, int y);
 
         public int clamp(int value, int min, int max)

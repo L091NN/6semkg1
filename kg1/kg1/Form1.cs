@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,6 +15,7 @@ namespace kg1
     public partial class Form1 : Form
     {
         Bitmap image;
+
         public Form1()
         {
             InitializeComponent();
@@ -146,6 +149,82 @@ namespace kg1
         {
             Filters filter = new Waves2();
             backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void erosionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new Erosion();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void dilationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new Dilation();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void openingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter1 = new Erosion();
+            Filters filter2 = new Dilation();
+
+            image = filter1.processImage(image);
+            backgroundWorker1.RunWorkerAsync(filter2);
+        }
+
+        private void closingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter1 = new Dilation();
+            Filters filter2 = new Erosion();
+
+            image = filter1.processImage(image);
+            backgroundWorker1.RunWorkerAsync(filter2);
+        }
+
+        private void topHatToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Bitmap new_image1 = (Bitmap)image.Clone();
+            Bitmap new_image2 = new Bitmap(image.Width, image.Height);
+            Filters filter1 = new Erosion();
+            Filters filter2 = new Dilation();
+
+            image = filter1.processImage(image);
+            image = filter2.processImage(image);
+
+            for (int i = 0; i < image.Width; ++i)
+            {
+                for(int j = 0; j < image.Height; ++j)
+                {
+                    Color new_color = Color.FromArgb(filter1.clamp(new_image1.GetPixel(i, j).R - image.GetPixel(i, j).R, 0, 0xff),
+                                                     filter1.clamp(new_image1.GetPixel(i, j).G - image.GetPixel(i, j).G, 0, 0xff),
+                                                     filter1.clamp(new_image1.GetPixel(i, j).B - image.GetPixel(i, j).B, 0, 0xff));
+                    image.SetPixel(i, j, new_color);
+                }
+            }
+
+            pictureBox1.Image = image;
+            pictureBox1.Refresh();
+        }
+
+        private void изменитьЯдроToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string width  = Interaction.InputBox("Ширина ядра", "Width", Morphology.x.ToString());
+            string height = Interaction.InputBox("Высота ядра", "Height", Morphology.y.ToString());
+
+            bool result;
+            int new_width;
+            int new_height;
+
+            result = int.TryParse(width, out new_width);
+            if (result)
+            {
+                Morphology.x = new_width;
+            }
+            result = int.TryParse(height, out new_height);
+            if (result)
+            {
+                Morphology.y = new_height;
+            }
         }
     }
 }
