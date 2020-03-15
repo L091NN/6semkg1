@@ -54,9 +54,9 @@ namespace kg1
             int green = sourceColor.G;
             int blue  = sourceColor.B;
 
-            byte new_red   = (byte)clamp(red   * (common_avg / avg_red),   0, 0xff);
-            byte new_green = (byte)clamp(green * (common_avg / avg_green), 0, 0xff);
-            byte new_blue  = (byte)clamp(blue  * (common_avg / avg_blue),  0, 0xff);
+            byte new_red   = (byte)clamp((int)(red   * ((double)common_avg / (double)avg_red)),   0, 0xff);
+            byte new_green = (byte)clamp((int)(green * ((double)common_avg / (double)avg_green)), 0, 0xff);
+            byte new_blue  = (byte)clamp((int)(blue  * ((double)common_avg / (double)avg_blue)),  0, 0xff);
 
             return Color.FromArgb(new_red, new_green, new_blue);
         }
