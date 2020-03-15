@@ -40,9 +40,9 @@ namespace kg1
             int green = sourceColor.G;
             int blue  = sourceColor.B;
 
-            return Color.FromArgb(clamp(0xff * (red   - min_index_red)   / (clamp(max_index_red   - min_index_red,   1, 0xff)), 0, 0xff),
-                                  clamp(0xff * (green - min_index_green) / (clamp(max_index_green - min_index_green, 1, 0xff)), 0, 0xff),
-                                  clamp(0xff * (blue  - min_index_blue)  / (clamp(max_index_blue  - min_index_blue,  1, 0xff)), 0, 0xff));
+            return Color.FromArgb(clamp((int)((0xff * (double)(red   - min_index_red))   / (double)(clamp(max_index_red   - min_index_red,   1, 0xff))), 0, 0xff),
+                                  clamp((int)((0xff * (double)(green - min_index_green)) / (double)(clamp(max_index_green - min_index_green, 1, 0xff))), 0, 0xff),
+                                  clamp((int)((0xff * (double)(blue  - min_index_blue))  / (double)(clamp(max_index_blue  - min_index_blue,  1, 0xff))), 0, 0xff));
         }
 
 
