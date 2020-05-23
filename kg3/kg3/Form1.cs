@@ -28,16 +28,22 @@ namespace kg3
 
             this.SuspendLayout();
 
-            this.Width  = 800;
-            this.Height = 800;
-
             this.panel.Location = new System.Drawing.Point(0, 0);
             this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(this.Width, this.Height);
+            this.panel.Size = new System.Drawing.Size(this.Width / 2, this.Height);
             this.panel.TabIndex = 0;
 
             this.Controls.Add(this.panel);
             this.ResumeLayout(false);
+
+            boxXBar.Minimum     = -3;
+            boxXBar.Maximum     =  3;
+            boxYBar.Minimum     = -3;
+            boxYBar.Maximum     =  3;
+            boxZBar.Minimum     = -3;
+            boxZBar.Maximum     =  3;
+            boxColorBar.Maximum =  4;
+            refractionBar.Minimum = 2;
         }
 
 
@@ -49,6 +55,8 @@ namespace kg3
 
             updateThread = new Thread(Update);
             updateThread.Start();
+
+            this.Closed += CloseEvent;
         }
 
 
@@ -62,13 +70,11 @@ namespace kg3
 
         private void Form1_Resize(object sender, EventArgs e)
         {
-            this.panel.Width  = this.Width;
+            this.panel.Width  = this.Width / 2;
             this.panel.Height = this.Height;
 
             if (this.Created)
                 shader.Resize(panel.Width, panel.Height);
-
-            this.Closed += CloseEvent;
         }
 
 
@@ -137,5 +143,47 @@ namespace kg3
             updateThread.Abort();
         }
 
+
+        private void boxSizeBar_Scroll(object sender, EventArgs e)
+        {
+            TrackBar trackBar = sender as TrackBar;
+            shader.SetBoxSize(trackBar.Value);
+        }
+
+        private void boxXBar_Scroll(object sender, EventArgs e)
+        {
+            TrackBar trackBar    = sender as TrackBar;
+            shader.boxPosition.X = trackBar.Value;
+        }
+
+        private void boxYBar_Scroll(object sender, EventArgs e)
+        {
+            TrackBar trackBar    = sender as TrackBar;
+            shader.boxPosition.Y = trackBar.Value;
+        }
+
+        private void boxZBar_Scroll(object sender, EventArgs e)
+        {
+            TrackBar trackBar    = sender as TrackBar;
+            shader.boxPosition.Z = trackBar.Value;
+        }
+
+        private void boxColorBar_Scroll(object sender, EventArgs e)
+        {
+            TrackBar trackBar = sender as TrackBar;
+            shader.boxColor   = new Vector3(trackBar.Value);
+        }
+
+        private void reflectionBar_Scroll(object sender, EventArgs e)
+        {
+            TrackBar trackBar      = sender as TrackBar;
+            shader.lightReflection = new Vector3((float)trackBar.Value / (float)trackBar.Maximum);
+        }
+
+        private void refractionBar_Scroll(object sender, EventArgs e)
+        {
+            TrackBar trackBar      = sender as TrackBar;
+            shader.lightRefraction = new Vector3((float)trackBar.Value / (float)trackBar.Maximum);
+        }
     }
 }
